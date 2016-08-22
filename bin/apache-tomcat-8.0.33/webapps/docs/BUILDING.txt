@@ -130,9 +130,14 @@ ${tomcat.source}.
     directory outside of the source tree, so that you do not waste your
     time re-downloading the libraries.
 
-* NOTE: The default value of the base.path property configures the build script
-  to download the libraries required to build Tomcat to the
-  ${user.home}/tomcat-build-libs directory.
+* WARNING: The default value of base.path property makes the build script
+  to download libraries required to build Tomcat to the /usr/share/java
+  directory. On a typical Linux or MacOX system an ordinary user will not
+  have access to write to this directory. Even if you do have access to
+  that directory, it is likely not appropriate for you to write there.
+
+  On Windows this usually corresponds to the "C:\usr\share\java"
+  directory, unless Cygwin is used.
 
 * NOTE: Users accessing the Internet through a proxy must use the properties
   file to indicate to Ant the proxy configuration.
@@ -347,24 +352,7 @@ For example:
     test.entry.methods=testMultiply01,testMultiply02
 
 
-(7.3) Running a set of tests
-
-It is possible to run a set of JUnit test classes by adding the "test.name"
-property to the build.properties file. The property specifies an Ant
-includes pattern for the fileset of test class files to run.
-
-The default value is "**/Test*.java", so all test classes are being
-executed (with few exceptions - see build.xml for several exclude patterns).
-
-You can include multiple patterns by concatenating them with a comma (",")
-as the separator.
-
-For example:
-
-    test.name=**/TestSsl.java,**/TestWebSocketFrameClientSSL.java
-
-
-(7.4) Other configuration options
+(7.3) Other configuration options
 
  1. It is possible to configure the directory where JUnit reports are
  written to. It is configured by "test.reports" property. The default
